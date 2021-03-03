@@ -11,8 +11,6 @@ import java.util.Date;
 @Entity
 @Table(name = "schedule")
 public class ScheduleVO implements Serializable {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int eventId;

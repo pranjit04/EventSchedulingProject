@@ -26,7 +26,7 @@ public class ScheduleHelper {
      * @return an instance of job builder
      */
     public JobDetail buildJobDetail(ScheduleVO schedulerVO) {
-        JobDataMap jobDataMap = new JobDataMap();
+        JobDataMap jobDataMap = new JobDataMap(); // JobDataMap is used to store jobs in the scheduler
         String eventName= schedulerVO.getEventName();
         String eventDetails= schedulerVO.getEventDetails();
         jobDataMap.put("name",eventName);
@@ -61,10 +61,11 @@ public class ScheduleHelper {
         	trigger.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInHours(Integer.parseInt(repeatationFrequency.substring(0, repeatationFrequency.length()-5))).repeatForever());
         } else if(repeatationFrequency.endsWith("minutes")) {
         	trigger.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(Integer.parseInt(repeatationFrequency.substring(0, repeatationFrequency.length()-7))).repeatForever());
-        	//10hours
         }
         return trigger.build();
     }
+
+
     public Trigger buildJobTriggerMultiple(JobDetail jobDetail, Date startDateTime, Date endDateTime, String cronExpression) {
         return TriggerBuilder.newTrigger()
                 .forJob(jobDetail)

@@ -38,18 +38,19 @@ public class EventDao {
         getSession().save(schedule);
     }
 
-   
     public List<ScheduleVO> getAllEvents() {
 
         Query q = getSession().createQuery("FROM ScheduleVO");
         List<ScheduleVO> allEvents = q.list();
         return allEvents;
     }
+
     public List<ScheduleVO> getAllEventsActive() {
-        Query q = getSession().createQuery("FROM ScheduleVO s where s.status='"+ ScheduleStatus.ACTIVE.name()+"'");
+        Query q = getSession().createQuery("FROM ScheduleVO s where s.status='" + ScheduleStatus.ACTIVE.name() + "'");
         List<ScheduleVO> allEvents = q.list();
         return allEvents;
     }
+
     public void updateEvent(ScheduleVO schedule) {
 
         getSession().saveOrUpdate(schedule);
@@ -57,17 +58,15 @@ public class EventDao {
 
     public ScheduleVO getOneEvent(int eventId) {
 
-        Query q = getSession().createQuery("FROM ScheduleVO where eventId="+eventId);
+        Query q = getSession().createQuery("FROM ScheduleVO where eventId=" + eventId);
         ScheduleVO oneEvent = (ScheduleVO) q.uniqueResult();
         return oneEvent;
     }
-    public void deleteEvent(int id)
-    {
-        ScheduleVO scheduleVO=getOneEvent(id);
-       getSession().delete(scheduleVO);
+
+    public void deleteEvent(int id) {
+        ScheduleVO scheduleVO = getOneEvent(id);
+        getSession().delete(scheduleVO);
 
     }
-
-
-
+    
 }

@@ -30,7 +30,13 @@ public class EventServiceImpl  implements EventService{
     ScheduleHelper scheduleHelper;
     @Autowired
     private Scheduler scheduler;
-    
+
+    /**
+     * This method makes events in the scheduler persistent, means if server is restarted all
+     * the active events in the scheduler gets active again
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     @PostConstruct
     public void triggerEventsOnStartup() throws ClassNotFoundException, SQLException {
     	List<ScheduleVO> allEvents = eventDao.getAllEventsActive();
@@ -51,6 +57,11 @@ public class EventServiceImpl  implements EventService{
 
     }
 
+    /**
+     * The method schedules the job after the event is save and perform accordingly with the condition either scheduling event is repeatable or not
+     * @param schedule
+     * @throws SchedulerException
+     */
 	private void buildScheduleJob(ScheduleVO schedule) throws SchedulerException {
 		JobDetail jobDetails = scheduleHelper.buildJobDetail(schedule);
         Trigger trigger=null;
