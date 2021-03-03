@@ -16,6 +16,12 @@ public class ScheduleJob extends QuartzJobBean {
     @Autowired
     private EventDao eventDao;
     private static final Logger log= LoggerFactory.getLogger(ScheduleJob.class);
+
+    /**
+     * Method to  print the event details in logs When the event is fired and change its status accordingly.
+     * @param context
+     * @throws JobExecutionException
+     */
     @Override
 
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {

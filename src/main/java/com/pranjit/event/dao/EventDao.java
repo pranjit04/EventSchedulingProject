@@ -68,5 +68,5 @@ public class EventDao {
         getSession().delete(scheduleVO);
 
     }
-    
+
 }
