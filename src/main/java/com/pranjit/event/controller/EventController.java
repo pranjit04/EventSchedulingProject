@@ -53,7 +53,7 @@ public class EventController {
      *
      * @return A list of details of the all  events.
      */
-    @GetMapping(path = "event/getAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/getAll", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ScheduleVO> getAllEvents() throws SQLException, ClassNotFoundException {
         List<ScheduleVO> eventList = eventService.getAllEvents();
         return eventList;
@@ -62,7 +62,7 @@ public class EventController {
      * @param eventId This REST end point is designed to get details of one individual  events in the scheduler.
      * @return A list of details of the one individual events.
      */
-    @GetMapping(path = "/event/getOne/{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/getOne/{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ScheduleVO getOneEvent(@PathVariable int eventId) throws SQLException, ClassNotFoundException {
         ScheduleVO oneEvent = eventService.getOneEvent(eventId);
         return oneEvent;
@@ -72,7 +72,7 @@ public class EventController {
      *
      * @return A list of details of the all active events.
      */
-    @GetMapping(path = "event/getAll/active", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/getAll/active", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ScheduleVO> getAllEventsActive() throws SQLException, ClassNotFoundException {
         List<ScheduleVO> eventList = eventService.getAllEventsActive();
         return eventList;
