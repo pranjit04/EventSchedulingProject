@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.xml.bind.ValidationException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.JobDetail;
@@ -107,7 +108,20 @@ public class EventServiceImpl  implements EventService{
         return "deleted successfully";
 
     }
-	
+    @Override
+       public void cancelEvent (int eventId) throws SQLException, ClassNotFoundException, ValidationException {
+          ScheduleVO event= getOneEvent(eventId);
+          if(event.getStatus().equals(ScheduleStatus.INACTIVE.name()))
+          {
+              event.setStatus(ScheduleStatus.STOPPED.name()) ;
+              eventDao.updateEvent(event);
+          }
+          else{
+              throw new ValidationException("only inactive instances can be stopped");
+          }
+
+
+       }
 
 
 }

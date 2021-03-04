@@ -6,17 +6,12 @@ import java.util.List;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.pranjit.event.entities.ScheduleVO;
 import com.pranjit.event.service.EventService;
+
+import javax.xml.bind.ValidationException;
 
 @RestController
 @RequestMapping("/events")
@@ -76,5 +71,10 @@ public class EventController {
     public List<ScheduleVO> getAllEventsActive() throws SQLException, ClassNotFoundException {
         List<ScheduleVO> eventList = eventService.getAllEventsActive();
         return eventList;
+    }
+    @PutMapping(path = "/cancel/{eventId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String cancelEvent(@PathVariable int eventId) throws ValidationException, SQLException, ClassNotFoundException {
+         eventService.cancelEvent(eventId);
+         return "event cancelled successfully";
     }
 }

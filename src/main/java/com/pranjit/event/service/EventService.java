@@ -7,10 +7,14 @@ import java.util.List;
 
 import org.quartz.SchedulerException;
 
+import javax.xml.bind.ValidationException;
+
 public interface EventService {
     String createEvent(ScheduleVO category) throws SchedulerException;
     public List<ScheduleVO> getAllEvents() throws SQLException, ClassNotFoundException;
     public List<ScheduleVO> getAllEventsActive() throws SQLException, ClassNotFoundException;
     public ScheduleVO getOneEvent(int eventId) throws SQLException, ClassNotFoundException;
     String deleteEvent(int id);
+
+    void cancelEvent(int eventId) throws SQLException, ClassNotFoundException, ValidationException;
 }

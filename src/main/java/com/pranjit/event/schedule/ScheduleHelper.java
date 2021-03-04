@@ -33,7 +33,7 @@ public class ScheduleHelper {
         jobDataMap.put("details",eventDetails);
         jobDataMap.put("schedule",schedulerVO);
 
-        return JobBuilder.newJob(ScheduleJob.class)
+        return JobBuilder.newJob(ScheduleJob.class) //It is a class of quartz to create a job and build the job
                 .withIdentity(UUID.randomUUID().toString(), "my-jobs")
                 .withDescription(" Running Schedule Jobs")
                 .usingJobData(jobDataMap)
